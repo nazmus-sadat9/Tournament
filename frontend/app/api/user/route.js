@@ -10,17 +10,6 @@ async function connectDB() {
   return mongoose.connect(MONGODB_URI);
 }
 
-// 1. Define the Project Schema & Model
-const ProjectSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  techStack: [String],
-  link: String,
-  github: String,
-});
-
-// Reuse existing model if already compiled, or create a new one
-const Project = mongoose.models.Project || mongoose.model('Project', ProjectSchema);
 
 export async function GET() {
   try {
@@ -29,13 +18,13 @@ export async function GET() {
     }
 
     await connectDB();
-    const projects = await Project.find({});
+    const projects = await Team.find({});
     
     return NextResponse.json(projects, { status: 200 });
   } catch (error) {
     console.error('API Route Error:', error);
     return NextResponse.json(
-      { message: 'Failed to fetch projects', error: error.message },
+      { message: 'Failed to fetch teams', error: error.message },
       { status: 500 }
     );
   }

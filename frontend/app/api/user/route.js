@@ -11,16 +11,26 @@ async function connectDB() {
 }
 
 
+const TeamSchema = new mongoose.Schema({
+  title: String,
+  members: [String]
+});
+
+
+const Team = mongoose.models.Team || mongoose.model('Team', TeamSchema);
+
 export async function GET() {
+
   try {
     if (!MONGODB_URI) {
       throw new Error('MONGO_URI environment variable is missing');
     }
 
     await connectDB();
-    const projects = await Team.find({});
+    const teams = await Team.find({});
     
-    return NextResponse.json(projects, { status: 200 });
+    return NextResponse.json(teams, { status: 200 });
+  
   } catch (error) {
     console.error('API Route Error:', error);
     return NextResponse.json(

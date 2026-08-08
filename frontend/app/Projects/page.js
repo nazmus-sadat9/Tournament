@@ -8,9 +8,8 @@ export default function ProjectsPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    fetch(`/api/user`)
+    fetch("/api/user")
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch projects');
         return res.json();

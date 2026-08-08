@@ -1,8 +1,10 @@
-export function Teams(){
+import FoundTeams from "../Components/FoundTeams";
+
+export default function Teams(){
 
   return(
     <div>
-      Teams
+      <FoundTeams />
     </div>
   )
 

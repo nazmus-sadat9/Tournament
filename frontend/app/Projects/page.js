@@ -10,7 +10,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    fetch(`https://ff-2026.onrender.com/api/user`)
+    fetch(`/api/user`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch projects');
         return res.json();

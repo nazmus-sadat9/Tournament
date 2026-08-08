@@ -10,7 +10,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    fetch(`${apiUrl}/api/projects`)
+    fetch(`${apiUrl}/api/user`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch projects');
         return res.json();

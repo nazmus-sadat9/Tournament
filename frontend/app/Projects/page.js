@@ -1,4 +1,3 @@
-// app/projects/page.jsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -9,7 +8,7 @@ export default function ProjectsPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     fetch(`${apiUrl}/api/projects`)
       .then((res) => {

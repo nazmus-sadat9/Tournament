@@ -22,25 +22,20 @@ export async function POST(req) {
   try {
     await connectDB();
 
-    const { title, members } = req.json();
+    const body = await req.json();
+    const { title, members } = body;
 
-    const isExits = Team.findOne({
-      title
-    });
+    const isExists = await Team.findOne({ title });
 
-    if (isExits) {
+    if (isExists) {
 
-      return NextResponse.json({message: "Team already exists!"}, {status: 500});
+      return NextResponse.json({message: "Team already exists!"}, {status: 409});
     
-    } else {
-
-      const newTeam = TeamSchema.create({
-        title, 
-        members
-      });
-    
-      return NextResponse.json({message: "team registered successfully."}, { status: 201 });
     }
+
+    await Team.create({ title, members });
+    
+    return NextResponse.json({message: "team registered successfully."}, { status: 201 });
 
   } catch (err) {
     

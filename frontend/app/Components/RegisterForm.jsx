@@ -70,21 +70,18 @@ const RegisterForm = () => {
     }
 
     if (isValid) {
-      
-      const team = {
-        name,
-        members: [one, two, three, four]
-      };
 
       try {
         let res = await fetch("/api/login", {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(team)
+          body: JSON.stringify({ title: name, members: [one, two, three, four] })
         });
 
+        const data = await res.json();
+
         if (res.ok) {
-          alert("Registation successful.");
+          alert(data.message);
           setName("");
           setOne("");
           setTwo("");
@@ -92,7 +89,7 @@ const RegisterForm = () => {
           setFour("");
 
         } else {
-          alert(res.message);
+          alert(data.message);
         }
 
       } catch (err) {
